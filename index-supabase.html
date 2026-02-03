@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clone - Социальная сеть</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Главный экран входа/регистрации -->
+        <div id="authScreen" class="screen active">
+            <div class="auth-container">
+                <div class="logo">
+                    <h1 class="logo-text">Clone</h1>
+                </div>
+                
+                <div class="auth-forms">
+                    <!-- Форма входа -->
+                    <div id="loginForm" class="auth-form">
+                        <h2>Войти</h2>
+                        <form id="loginFormElement">
+                            <div class="form-group">
+                                <input type="email" id="loginEmail" placeholder="Электронная почта" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="loginPassword" placeholder="Пароль" required>
+                            </div>
+                            <button type="submit" class="btn-primary">ВОЙТИ</button>
+                        </form>
+                        <p class="switch-form">
+                            Нет аккаунта? <a href="#" id="switchToRegister">ЗАРЕГИСТРИРОВАТЬСЯ</a>
+                        </p>
+                    </div>
+                    
+                    <!-- Форма регистрации -->
+                    <div id="registerForm" class="auth-form hidden">
+                        <h2>Регистрация</h2>
+                        <form id="registerFormElement">
+                            <div class="form-group">
+                                <input type="email" id="registerEmail" placeholder="Эл. почта" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="registerPassword" placeholder="Пароль" pattern=".{8,}" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="registerName" placeholder="Имя" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="registerUsername" placeholder="Никнейм" pattern=".{4,}" required>
+                            </div>
+                            <button type="submit" class="btn-primary">ЗАРЕГИСТРИРОВАТЬСЯ</button>
+                        </form>
+                        <p class="switch-form">
+                            Уже есть аккаунт? <a href="#" id="switchToLogin">ВОЙТИ</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Экран ленты новостей -->
+        <div id="feedScreen" class="screen">
+            <header class="app-header">
+                <div class="header-left">
+                    <h1 class="logo-text">Clone</h1>
+                </div>
+                <div class="header-center">
+                    <input type="text" id="searchInput" placeholder="Поиск пользователей..." class="search-input">
+                </div>
+                <div class="header-right">
+                    <button id="themeToggle" class="theme-btn">🌙</button>
+                    <button id="profileBtn" class="profile-btn">👤</button>
+                    <button id="logoutBtn" class="logout-btn">🚪</button>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <!-- Форма создания поста -->
+                <div class="create-post">
+                    <form id="postForm">
+                        <textarea id="postContent" placeholder="Что у вас нового?" rows="3"></textarea>
+                        <div class="post-actions">
+                            <input type="file" id="postMedia" multiple accept="image/*,video/*" class="media-input">
+                            <button type="submit" class="btn-primary">Опубликовать</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Лента постов -->
+                <div id="feedContainer" class="feed">
+                    <!-- Посты будут добавлены динамически -->
+                </div>
+            </main>
+        </div>
+
+        <!-- Экран поиска -->
+        <div id="searchScreen" class="screen">
+            <header class="app-header">
+                <div class="header-left">
+                    <button id="feedBtn" class="back-btn">← Назад</button>
+                </div>
+                <div class="header-center">
+                    <h2>Поиск пользователей</h2>
+                </div>
+                <div class="header-right">
+                    <button id="themeToggle" class="theme-btn">🌙</button>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <div id="searchResults" class="search-results">
+                    <!-- Результаты поиска будут добавлены динамически -->
+                </div>
+            </main>
+        </div>
+
+        <!-- Экран профиля -->
+        <div id="profileScreen" class="screen">
+            <header class="app-header">
+                <div class="header-left">
+                    <button id="feedBtn" class="back-btn">← Назад</button>
+                </div>
+                <div class="header-center">
+                    <h2>Профиль</h2>
+                </div>
+                <div class="header-right">
+                    <button id="themeToggle" class="theme-btn">🌙</button>
+                </div>
+            </header>
+
+            <main class="main-content">
+                <div id="profileContainer" class="profile">
+                    <!-- Профиль будет добавлен динамически -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Уведомления -->
+    <div id="notifications" class="notifications"></div>
+
+    <!-- Подключение скриптов -->
+    <script src="supabase-config.js"></script>
+    <script src="database-supabase.js"></script>
+    <script src="script-supabase.js"></script>
+</body>
+</html>
